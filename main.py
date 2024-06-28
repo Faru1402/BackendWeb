@@ -15,7 +15,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
+@app.get("/h")
 def read_root():
 
     return {"backend": "0.01"}
@@ -23,16 +23,14 @@ def read_root():
 @app.get("/get_product_specification/")
 def get_product_specification():
     """function to get product specification"""
-    product = products.products()
-    result = product.get_products()
+    result = products.get_products()
     
     return{"result": result}
 
 @app.get("/get_service_price/{category}/{subcategory}")
 def get_service_price(category: str, subcategory: str):
     """function to get service price"""
-    product = products.products()
-    result = product.get_service_price(category, subcategory)
+    result = products.get_service_price(category, subcategory)
     return {"result": result}
 
 
