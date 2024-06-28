@@ -1,9 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI(title= 'Tarea 8',
-    description='Esta es la tarea 8', 
-    version='1.0')
+app = FastAPI()
 
 # Solucion CORS
 origins = ["*"]
@@ -15,7 +13,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/h")
+@app.get("/")
 def read_root():
 
     return {"backend": "0.01"}
