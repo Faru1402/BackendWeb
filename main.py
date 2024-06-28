@@ -1,8 +1,20 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from app.service import products
 
-app = FastAPI()
+app = FastAPI(title= 'Tarea 8',
+    description='Esta es la tarea 8', 
+    version='1.0')
 
+# Solucion CORS
+origins = ["*"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def read_root():
