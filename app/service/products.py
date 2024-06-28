@@ -1,30 +1,44 @@
-from app.dao import mysql
+import json
 
 
 class products:
     def __init__(self):
+        pass
 
-        self.connection = mysql.Mysql(
-            host="localhost",
-            user="root",
-            passwd="root",
-        ).connect()
-
-        self.connection.execute("USE inventario;")
-        
-
-    def get_products(self, name: str):
+    def get_products(self):
         """function to get products"""
-        query = f"SELECT id, name, description, owner_id, justification FROM items WHERE name = '{name}'"
-        self.connection.execute(query)
-        result = self.connection.fetchall()
-        json_result = {}
-        for row in result:
-            json_result = {
-            'id': row[0],
-            'name': row[1],
-            'description': row[2],
-            'owner_id': row[3],
-            'justification': row[4]
-            }
-        return json_result
+        info = {
+        "MANICURE": {
+        "Acrilicas": "$150,000",
+        "Polygel": "$125,000",
+        "Press On": "$110,000",
+        "Semipermanente": "$40,000",
+        "Tradicional": "$20,000"
+        },
+        "PEDICURE": {
+        "Semipermanente": "$50,000",
+        "Tradicional": "$30,000"
+        }
+        }
+
+        return info
+
+    def get_service_price(self,category, subcategory):
+        info = {
+        "MANICURE": {
+        "Acrilicas": "$150,000",
+        "Polygel": "$125,000",
+        "Press On": "$110,000",
+        "Semipermanente": "$40,000",
+        "Tradicional": "$20,000"
+        },
+        "PEDICURE": {
+        "Semipermanente": "$50,000",
+        "Tradicional": "$30,000"
+        }
+        }
+
+        if category in info and subcategory in info[category]:
+            return info[category][subcategory]
+        else:
+            return "Combination not found"
